@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-GO_VERSION="${GO_VERSION:-1.22.0}"
+GO_VERSION="${GO_VERSION:-1.22.1}"
 GO_TARBALL="go${GO_VERSION}.linux-amd64.tar.gz"
 GO_DOWNLOAD_URL="${GO_DOWNLOAD_URL:-https://dl.google.com/go/${GO_TARBALL}}"
 GO_TEMP_DIR="${GO_TEMP_DIR:-$(mktemp --directory)}"
