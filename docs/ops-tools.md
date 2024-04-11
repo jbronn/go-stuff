@@ -21,6 +21,8 @@ mv -v execs/k9s ~/.local/bin
 ## `sops`
 
 ```
+make vendor
+go build -o ~/.local/bin/sops github.com/getsops/sops/v3/cmd/sops
 ```
 
 ## `vcluster`
