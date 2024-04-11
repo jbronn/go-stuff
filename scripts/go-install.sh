@@ -2,9 +2,17 @@
 set -euo pipefail
 
 GO_VERSION="${GO_VERSION:-1.22.2}"
-GO_TARBALL="go${GO_VERSION}.linux-amd64.tar.gz"
+if [ "$(uname -s)" = "Darwin" ]; then
+    if [ "$(machine)" = "x86_64h" ]; then
+        GO_TARBALL="go${GO_VERSION}.darwin-amd64.tar.gz"
+    else
+        GO_TARBALL="go${GO_VERSION}.darwin-arm64.tar.gz"
+    fi
+elif [ "$(uname -s)" = "Linux" ]; then
+    GO_TARBALL="go${GO_VERSION}.linux-amd64.tar.gz"
+fi
 GO_DOWNLOAD_URL="${GO_DOWNLOAD_URL:-https://dl.google.com/go/${GO_TARBALL}}"
-GO_TEMP_DIR="${GO_TEMP_DIR:-$(mktemp --directory)}"
+GO_TEMP_DIR="${GO_TEMP_DIR:-$(mktemp -d)}"
 
 pushd "${GO_TEMP_DIR}"
 
