@@ -11,11 +11,53 @@ mv -v dist/argocd ~/.local/bin
 
 ## `clusterctl`
 
+## `istioctl`
+
+macOS:
+
+```
+mkdir out
+GOOS=darwin GOARCH=arm64 LDFLAGS='-extldflags -static -s -w' \
+common/scripts/gobuild.sh \
+out/istioctl \
+./istioctl/cmd/istioctl
+sudo cp -v out/istioctl /usr/local/bin
+```
+
+Linux:
+
+```
+GOOS=linux GOARCH=amd64 LDFLAGS='-extldflags -static -s -w' \
+common/scripts/gobuild.sh \
+$HOME/.local/bin/istioctl \
+./istioctl/cmd/istioctl
+```
+
 ## `k9s`
 
 ```
 make build
 mv -v execs/k9s ~/.local/bin
+```
+
+## `nuclio`
+
+
+macOS:
+
+```
+GOOS=darwin GOARCH=arm64 go build \
+-ldflags="-s -w -X github.com/v3io/version-go.gitCommit=$(git rev-parse HEAD) -X github.com/v3io/version-go.label=1.14.0 -X github.com/v3io/version-go.arch=arm64" \
+-o nuctl \
+cmd/nuctl/main.go
+sudo cp -v nuctl /usr/local/bin
+```
+
+## `opentofu` on macOS
+
+```
+CGO_ENABLED=1 go build -ldflags "-w -s -X 'github.com/opentofu/opentofu/version.dev=no'" -o dist/ ./cmd/tofu
+sudo cp -v dist/tofu /usr/local/bin
 ```
 
 ## `sops`
@@ -36,4 +78,12 @@ go build -mod vendor -tags embed_charts -ldflags "-X main.version=${RELEASE_VERS
 
 # Install
 mv -v out/vcluster ~/.local/bin
+```
+
+## `yq`
+
+```
+go build \
+-ldflags="-X main.GitCommit=$(git rev-parse HEAD) -X main.GitDescribe=$(git describe --tags --always) -w -s"
+sudo cp -v yq /usr/local/bin
 ```
