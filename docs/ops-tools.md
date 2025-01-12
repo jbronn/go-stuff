@@ -11,6 +11,13 @@ sudo cp -v dist/argocd /usr/local/bin
 
 ## `clusterctl`
 
+## `helm`
+
+```
+make build
+sudo cp -v bin/helm /usr/local/bin
+```
+
 ## `istioctl`
 
 ```
@@ -21,6 +28,13 @@ common/scripts/gobuild.sh \
 istioctl/istioctl \
 ./istioctl/cmd/istioctl
 sudo cp -v istioctl/istioctl /usr/local/bin
+```
+
+## `kubectl`
+
+```
+make all WHAT=cmd/kubectl
+sudo cp -v ./_output/bin/kubectl /usr/local/bin
 ```
 
 ## `k9s`
