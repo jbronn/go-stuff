@@ -57,7 +57,9 @@ sudo cp -v nuctl /usr/local/bin
 ## `opentofu`
 
 ```
-CGO_ENABLED=1 go build -ldflags "-w -s -X 'github.com/opentofu/opentofu/version.dev=no'" -o dist/ ./cmd/tofu
+CGO_ENABLED=1 go build \
+-ldflags "-w -s -X 'github.com/opentofu/opentofu/version.dev=no'" \
+-o dist/ ./cmd/tofu
 sudo cp -v dist/tofu /usr/local/bin
 ```
 
@@ -73,13 +75,12 @@ sudo cp -v sops /usr/local/bin
 
 ```
 # Build
-export RELEASE_VERSION=v0.19.x
-go generate -tags embed_charts ./...
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on \
-go build -mod vendor -tags embed_charts -ldflags "-X main.version=${RELEASE_VERSION}" -o out/vcluster cmd/vclusterctl/main.go
+CGO_ENABLED=0 GO111MODULE=on \
+go build -mod vendor -tags embed_charts \
+-ldflags "-X main.version=$(git describe --tags --always)" -o vcluster cmd/vclusterctl/main.go
 
 # Install
-sudo cp -v out/vcluster /usr/local/bin
+sudo cp -v vcluster /usr/local/bin
 ```
 
 ## `yq`
