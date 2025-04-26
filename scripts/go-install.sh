@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-GO_VERSION="${GO_VERSION:-1.24.1}"
+GO_VERSION="${GO_VERSION:-1.24.2}"
 if [ "$(uname -s)" = "Darwin" ]; then
     if [ "$(machine)" = "x86_64h" ]; then
         GO_TARBALL="go${GO_VERSION}.darwin-amd64.tar.gz"
