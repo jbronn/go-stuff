@@ -11,6 +11,13 @@ sudo cp -v dist/argocd /usr/local/bin
 
 ## `clusterctl`
 
+## `cosign`
+
+```
+make cosign
+sudo cp -v cosign /usr/local/bin
+```
+
 ## `helm`
 
 ```
@@ -69,6 +76,19 @@ sudo cp -v dist/tofu /usr/local/bin
 make vendor
 go build -o sops github.com/getsops/sops/v3/cmd/sops
 sudo cp -v sops /usr/local/bin
+```
+
+## `step` / `step-ca`
+
+```
+make build
+sudo cp -v bin/step /usr/local/bin
+```
+
+Cross-compile:
+
+```
+GOOS_OVERRIDE="GOOS=linux GOARCH=amd64" make build
 ```
 
 ## `vcluster`
